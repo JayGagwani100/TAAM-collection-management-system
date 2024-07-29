@@ -87,7 +87,7 @@ public class LoginScreenFragment extends LoaderFragment {
                         if (Objects.equals(passwordDatabase, passwordUser)) {
                             username.setError(null);
                             password.setError(null);
-                            loadFragment(new AdminHomeScreenFragment());
+                            loadFragment(new HomeScreenFragment());
                         } else {
                             password.setError("Wrong Password");
                             password.requestFocus();
