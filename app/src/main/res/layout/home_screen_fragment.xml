@@ -92,62 +92,62 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="50dp"
         android:layout_marginTop="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/homeScreenUserButtonContainer">
+
+        <Button
+            android:id="@+id/buttonView"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:id="@+id/homeScreenUserButtonContainer">
+            android:layout_marginStart="8dp"
+            android:text="@string/view_button_content" />
 
-            <Button
-                android:id="@+id/buttonView"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/view_button_content" />
-
-            <Button
-                android:id="@+id/buttonSearch"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/search_button_content" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/buttonSearch"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:id="@+id/homeScreenAdminButtonContainer"
-            android:visibility="gone">
-
-            <Button
-                android:id="@+id/buttonAdd"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/add_button_content" />
-
-            <Button
-                android:id="@+id/buttonRemove"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/remove_button_content" />
-
-            <Button
-                android:id="@+id/buttonReport"
-                android:layout_width="100dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="@string/report_button_content" />
-        </LinearLayout>
-
+            android:layout_marginStart="8dp"
+            android:text="@string/search_button_content" />
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:id="@+id/homeScreenAdminButtonContainer"
+        android:visibility="gone">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <Button
+            android:id="@+id/buttonAdd"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/add_button_content" />
+
+        <Button
+            android:id="@+id/buttonRemove"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/remove_button_content" />
+
+        <Button
+            android:id="@+id/buttonReport"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/report_button_content" />
+    </LinearLayout>
+
+</LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
