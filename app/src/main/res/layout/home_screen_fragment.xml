@@ -24,6 +24,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="50dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.544"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.591" />
+
     <View
         android:id="@+id/view2"
         android:layout_width="0dp"
@@ -34,13 +47,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/adminLoginContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="#FFFFFF"
-        app:layout_constraintTop_toBottomOf="@+id/textView2">
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:id="@+id/adminLogInTextDisplay"
@@ -49,7 +64,7 @@
             android:layout_marginStart="8dp"
             android:text="@string/admin_logged_in"
             android:textSize="16sp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -61,6 +76,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/admin_button_content"
             android:textColorLink="#D9BC20"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,11 +86,10 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:text="@string/log_out_button_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/buttonAdmin"
             app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -84,8 +99,8 @@
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/homeScreenButtonContainer"
         app:layout_constraintTop_toBottomOf="@+id/adminLoginContainer"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="16dp" />
+        app:layout_constraintVertical_bias="1.0"
+        tools:layout_editor_absoluteX="0dp" />
 
     <LinearLayout
         android:id="@+id/homeScreenButtonContainer"
@@ -111,14 +126,16 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/view_button_content" />
+                android:text="@string/view_button_content"
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/buttonSearch"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/search_button_content" />
+                android:text="@string/search_button_content"
+                android:visibility="visible" />
         </LinearLayout>
 
         <LinearLayout
@@ -136,21 +153,23 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:text="@string/add_button_content"
-                />
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/buttonRemove"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/remove_button_content" />
+                android:text="@string/remove_button_content"
+                android:visibility="visible" />
 
             <Button
                 android:id="@+id/buttonReport"
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/report_button_content" />
+                android:text="@string/report_button_content"
+                android:visibility="visible" />
         </LinearLayout>
 
     </LinearLayout>

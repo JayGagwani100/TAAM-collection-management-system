@@ -88,12 +88,20 @@ public class HomeScreenFragment extends LoaderFragment {
             @Override
             public void onClick(View view) {
                 ArrayList<DisplayItemCheckBox> viewItemList = new ArrayList<>();
+                boolean flag = false;
                 for (DisplayItemCheckBox item : itemList) {
                     if (item.isSelected()) {
                         viewItemList.add(item);
+                        flag = true;
                     }
                 }
-                loadFragment(new ViewScreenFragment(viewItemList));
+                if(flag){
+                    loadFragment(new ViewScreenFragment(viewItemList));
+                } else{
+                    TextView textView = view.findViewById(R.id.textView5);
+                    String message = "Please select an item to view.";
+                    textView.setText(message);
+                }
             }
         });
 
@@ -115,12 +123,20 @@ public class HomeScreenFragment extends LoaderFragment {
             @Override
             public void onClick(View v) {
                 ArrayList<DisplayItem> removeItemList = new ArrayList<>();
+                boolean flag = false;
                 for (DisplayItemCheckBox item : itemList) {
                     if (item.isSelected()) {
                         removeItemList.add(item.item);
+                        flag = true;
                     }
                 }
-                loadFragment(new RemoveScreenFragment(removeItemList));
+                if(flag){
+                    loadFragment(new RemoveScreenFragment(removeItemList));
+                } else{
+                    TextView textView = view.findViewById(R.id.textView);
+                    String message = "Please select an item to remove.";
+                    textView.setText(message);
+                }
             }
         });
 
