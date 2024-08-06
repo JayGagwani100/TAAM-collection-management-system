@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,7 @@ public class HomeScreenFragment extends LoaderFragment {
     private RecyclerView recyclerView;
     private DisplayItemAdapter itemAdapter;
     private List<DisplayItemCheckBox> itemList;
+    private DisplayItem searchParameters;
 
     private FirebaseDatabase db;
     private DatabaseReference itemsRef;
@@ -38,10 +40,13 @@ public class HomeScreenFragment extends LoaderFragment {
      */
     private static boolean isAdmin;
 
-    public HomeScreenFragment() {}
-
     public HomeScreenFragment(boolean isAdmin) {
         HomeScreenFragment.isAdmin = isAdmin;
+    }
+
+    public HomeScreenFragment(boolean isAdmin, String title, String lot, String category, String period, String description) {
+        HomeScreenFragment.isAdmin = isAdmin;
+        searchParameters = new DisplayItem("", title, lot, category, period, description, "");
     }
 
     @Nullable
@@ -68,6 +73,9 @@ public class HomeScreenFragment extends LoaderFragment {
         Button buttonRemove = view.findViewById(R.id.buttonRemove);
         Button buttonReport = view.findViewById(R.id.buttonReport);
 
+        view.findViewById(R.id.noResultsMsg).setVisibility(View.GONE);
+        if (searchParameters != null) buttonSearch.setText("Show All");
+
         buttonLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -91,15 +99,24 @@ public class HomeScreenFragment extends LoaderFragment {
                         viewItemList.add(item);
                     }
                 }
-                loadFragment(new ViewScreenFragment(viewItemList));
+
+                if (viewItemList.isEmpty()) {
+                    Toast.makeText(getContext(), "Please select items before trying to view them.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                loadFragment(new ViewScreenFragment(viewItemList, isAdmin));
             }
         });
 
         buttonSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Todo: change this to the search screen.
-                loadFragment(new ReportScreenFragment());
+                if (searchParameters == null) {
+                    loadFragment(new SearchScreenFragment(isAdmin));
+                } else {
+                    loadFragment(new HomeScreenFragment(isAdmin));
+                }
             }
         });
         buttonAdd.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +135,12 @@ public class HomeScreenFragment extends LoaderFragment {
                         removeItemList.add(item.item);
                     }
                 }
+
+                if (removeItemList.isEmpty()) {
+                    Toast.makeText(getContext(), "Please select items before trying to remove them.", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 loadFragment(new RemoveScreenFragment(removeItemList));
             }
         });
@@ -143,7 +166,17 @@ public class HomeScreenFragment extends LoaderFragment {
                 itemList.clear();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     DisplayItemCheckBox item = new DisplayItemCheckBox(snapshot.getValue(DisplayItem.class));
-                    itemList.add(item);
+                    if (searchParameters == null ||
+                            (searchParameters.getLot().toLowerCase().isEmpty() || item.item.getLot().contains(searchParameters.getLot().toLowerCase())) &&
+                            (searchParameters.getTitle().toLowerCase().isEmpty() || item.item.getTitle().contains(searchParameters.getTitle().toLowerCase())) &&
+                            (searchParameters.getCategory().toLowerCase().isEmpty() || item.item.getCategory().contains(searchParameters.getCategory().toLowerCase())) &&
+                            (searchParameters.getPeriod().toLowerCase().isEmpty() || item.item.getPeriod().contains(searchParameters.getPeriod().toLowerCase())) &&
+                            (searchParameters.getDescription().toLowerCase().isEmpty() || item.item.getDescription().contains(searchParameters.getDescription().toLowerCase())))
+                        itemList.add(item);
+                }
+
+                if (searchParameters != null && itemList.isEmpty()) {
+                    view.findViewById(R.id.noResultsMsg).setVisibility(View.VISIBLE);
                 }
                 itemAdapter.notifyDataSetChanged();
             }
